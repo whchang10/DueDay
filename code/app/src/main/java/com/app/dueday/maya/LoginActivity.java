@@ -1,4 +1,4 @@
-package com.app.dueday.mayan;
+package com.app.dueday.maya;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
