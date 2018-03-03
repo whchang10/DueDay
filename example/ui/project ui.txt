@@ -1,0 +1,6 @@
+Mobile
+Background color: #5A829B
+Front:Gill Sans
+Front color(main):#F8B6A2
+Front color(sub): #B4ADAB
+
