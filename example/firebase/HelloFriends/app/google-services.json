@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "464645819038",
+    "firebase_url": "https://maya-746f5.firebaseio.com",
+    "project_id": "maya-746f5",
+    "storage_bucket": "maya-746f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464645819038:android:cc9b7ac26102361b",
+        "android_client_info": {
+          "package_name": "net.macdidi.hellofriends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464645819038-54cm6iuhkpl3qd4pg8onj8lhrod6jirk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.macdidi.hellofriends",
+            "certificate_hash": "9d48b065c9bda6cff9a33a8c5bff14f04a60b758"
+          }
+        },
+        {
+          "client_id": "464645819038-5digfldv8ngca6j2f5s5sq0ff8qrjoe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl5NWErBgvfmwcIo3Hmz_W4EOwU6q2P4o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464645819038-5digfldv8ngca6j2f5s5sq0ff8qrjoe1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

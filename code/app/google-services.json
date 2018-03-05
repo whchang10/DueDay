@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "738416933209",
+    "firebase_url": "https://maya-52920.firebaseio.com",
+    "project_id": "maya-52920",
+    "storage_bucket": "maya-52920.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738416933209:android:46d764540e480b65",
+        "android_client_info": {
+          "package_name": "com.app.dueday.maya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738416933209-n6qe92tq74l90c04k0843jh1o5osp2m5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.dueday.maya",
+            "certificate_hash": "9d48b065c9bda6cff9a33a8c5bff14f04a60b758"
+          }
+        },
+        {
+          "client_id": "738416933209-i3bpdleniicqvlg044gp1eic8fc5hmdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTOHvAhV39TrLj7gUO37UwzgAFGkLg85Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738416933209-i3bpdleniicqvlg044gp1eic8fc5hmdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
