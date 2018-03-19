@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -141,12 +140,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FirebaseUtil.getCurrentUserRef().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        User currentUser;
                         if (!dataSnapshot.exists()) {
-                            User newUser = new User(FirebaseUtil.getUserID(), user.getDisplayName(),
+                            currentUser = new User(FirebaseUtil.getUserID(), user.getDisplayName(),
                                     user.getEmail(), user.getPhoneNumber(), user.getPhotoUrl() == null? "" : user.getPhotoUrl().toString());
 
-                            new NewUserHelper().execute(newUser);
+                            new NewUserHelper().execute(currentUser);
                         }
+                        else {
+                            currentUser = dataSnapshot.getValue(User.class);
+                        }
+
+                        FirebaseUtil.setCurrentUser(currentUser);
                     }
 
                     @Override
@@ -240,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_own) {
             Intent intent;
-            intent = new Intent(getApplicationContext(), OwnCalendar.class);
+            intent = new Intent(getApplicationContext(), PersonalCalendar.class);
 
             startActivity(intent);
         }

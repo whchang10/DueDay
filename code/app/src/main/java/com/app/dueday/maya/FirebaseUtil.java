@@ -12,9 +12,13 @@ public class FirebaseUtil {
     private static String mEmail;
     private static String mUserID;
 
+    private static User mUser;
+
     private FirebaseUtil() {
 
     }
+
+
 
     public static void initFirebaseUtil(String email) {
         setEmail(email);
@@ -27,6 +31,15 @@ public class FirebaseUtil {
     private static void setEmail(String email) {
         mEmail = email;
         mUserID = emailToNode(email);
+    }
+
+    public static User getCurrentUser() {
+        return mUser;
+    }
+
+    public static void setCurrentUser(User user) {
+        mUser = user;
+        setEmail(user.email);
     }
 
     public static String getEmail() {
