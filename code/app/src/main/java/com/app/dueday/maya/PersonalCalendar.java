@@ -24,7 +24,6 @@ public class PersonalCalendar extends AppCompatActivity {
 
         HashSet<Date> events = new HashSet<>();
         events.add(new Date());
-        //myCalendarView = (CalendarView) findViewById(R.id.CalendarView); // get the reference of CalendarView
 
         CalendarView myCalendarView = ((CalendarView)findViewById(R.id.calendar_view));
         myCalendarView.updateCalendar(events);
