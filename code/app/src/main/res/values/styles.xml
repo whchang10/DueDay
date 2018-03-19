@@ -6,7 +6,22 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:windowBackground">@drawable/background</item>-->
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/main</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppTheme.ActionBar</item>
+
+
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="actionMenuTextColor">@color/toolbar_text</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="colorControlActivated">@color/accent</item>
     </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background</item>
+    </style>
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -17,4 +32,22 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="ThemeOverlay.AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- title text color -->
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <!-- subtitle text color -->
+        <item name="android:textColorSecondary">@color/colorAccent</item>
+        <!-- action menu item text color -->
+        <item name="actionMenuTextColor">@color/colorPrimaryDark</item>
+        <!-- action menu item icon color -->
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+    </style>
+
+
+    <style name="Button">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 </resources>
