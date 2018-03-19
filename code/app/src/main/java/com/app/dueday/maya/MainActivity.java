@@ -1,5 +1,6 @@
 package com.app.dueday.maya;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,20 +22,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.LinkedList;
+import com.app.dueday.maya.adapter.EventListAdapter;
+import com.app.dueday.maya.module.EventListViewItem;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ListView mylistview;
     private List<String> myProjects;
+    ArrayList<EventListViewItem> data;
+    EventListAdapter adapter;
     public static final String EXTRA_PName = "";
 
     @Override
@@ -57,44 +63,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ///////////////////////////////////////////////////////////////////////////////////////////
         mylistview = (ListView) findViewById(R.id.projectList);
 
-        myProjects = new LinkedList<String>();
-        myProjects.add("PROJECT 1");
-        myProjects.add("PROJECT 2");
-        myProjects.add("PROJECT 3");
-        myProjects.add("PROJECT 4");
-        myProjects.add("PROJECT 5");
-
+        data = new ArrayList<EventListViewItem>();
 
         // set up ListView content
         // Create an ArrayAdapter from List
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, myProjects){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent){
-                // Get the current item from ListView
-                View view = super.getView(position,convertView,parent);
-                TextView ListItemShow = (TextView) view.findViewById(android.R.id.text1);
-                ListItemShow.setTextSize(TypedValue.COMPLEX_UNIT_DIP,50);
-                if(position %2 == 1)
-                {
-                    // Set a background color for ListView regular row/item
-                    view.setBackgroundResource(R.color.main);
-                    ListItemShow.setTextColor(getResources().getColor(R.color.sub));
-                }
-                else
-                {
-                    // Set the background color for alternate row/item
-                    view.setBackgroundResource(R.color.sub);
-                    ListItemShow.setTextColor(getResources().getColor(R.color.main));
-                }
-                return view;
-            }
-        };
+        adapter = new EventListAdapter(this, data);
 
         // DataBind ListView with items from ArrayAdapter
-        mylistview.setAdapter(arrayAdapter);
+        View header = (View)getLayoutInflater().inflate(R.layout.list_event_item, null);
+        mylistview.setAdapter(adapter);
         mylistview.setOnItemClickListener(onClickProjListView);
 
+//
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btn_addProject);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 Intent intent;
                 intent = new Intent(getApplicationContext(), CreateProject.class);
-
-                startActivity(intent);
+                startActivityForResult(intent, 1);
+//                startActivity(intent);
             }
         });
 
@@ -121,13 +101,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent;
             intent = new Intent(getApplicationContext(), Calendar.class);
-
-            String projectName = myProjects.get(position);
+//            String projectName = myProjects.get(position);
+            String projectName = data.get(position).title;
             intent.putExtra(EXTRA_PName, projectName);
             startActivity(intent);
         }
     };
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode == Activity.RESULT_OK) {
+            String title = intent.getStringExtra("title");
+            System.out.print("+++++");
+            System.out.print(title);
+            EventListViewItem e = new EventListViewItem(R.drawable.ic_launcher_foreground, title);
+            data.add(e);
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -172,15 +165,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_social) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_travel) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_work) {
 
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_own) {
+            Intent intent;
+            intent = new Intent(getApplicationContext(), OwnCalendar.class);
 
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

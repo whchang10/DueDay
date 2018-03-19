@@ -127,5 +127,10 @@
 
 
 
+    <string-array name="tag_array">
+        <item>Social</item>
+        <item>Work</item>
+        <item>Travel</item>
+    </string-array>
 
 </resources>
