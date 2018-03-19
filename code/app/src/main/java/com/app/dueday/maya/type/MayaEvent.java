@@ -1,7 +1,6 @@
-package com.app.dueday.maya;
+package com.app.dueday.maya.type;
 
-
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MayaEvent {
@@ -11,8 +10,8 @@ public class MayaEvent {
     public String details;
     public boolean mPersonal;
 
-    public Date beginTime;
-    public Date endTime;
+    public MayaDate beginTime;
+    public MayaDate endTime;
 
     public String projectID;
     public List<User> attendeeCollection;
@@ -22,13 +21,14 @@ public class MayaEvent {
     }
 
     public MayaEvent(String name, String location, String details, boolean personal) {
+        this.id = name + "+" + location + "+" + details + "+" + personal;
         this.name = name;
         this.location = location;
         this.details = details;
         this.mPersonal = personal;
     }
 
-    public MayaEvent(String name, String location, String details, boolean personal, Date beginTime, Date endTime) {
+    public MayaEvent(String name, String location, String details, boolean personal, MayaDate beginTime, MayaDate endTime) {
         this(name, location, details, personal);
 
         this.beginTime = beginTime;
@@ -39,16 +39,36 @@ public class MayaEvent {
         return mPersonal;
     }
 
-    public void setDuration(Date beginTime, Date endTime) {
+    public void setDuration(MayaDate beginTime, MayaDate endTime) {
         this.beginTime = beginTime;
         this.endTime = endTime;
     }
 
+    public MayaDate getBeginTime() {
+        if (beginTime == null) {
+            beginTime = new MayaDate();
+        }
+
+        return beginTime;
+    }
+
+    public MayaDate getEndTime() {
+        if (endTime == null) {
+            endTime = new MayaDate();
+        }
+
+        return endTime;
+    }
+
     public void addAttendee(User user) {
+        if (attendeeCollection == null) {
+            attendeeCollection = new ArrayList<>();
+        }
         attendeeCollection.add(user);
     }
 
     public void removeAttendee(User user) {
+        assert attendeeCollection != null;
         attendeeCollection.remove(user);
     }
 }

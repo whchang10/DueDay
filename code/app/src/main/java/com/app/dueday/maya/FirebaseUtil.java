@@ -1,7 +1,6 @@
 package com.app.dueday.maya;
 
-import android.provider.ContactsContract;
-
+import com.app.dueday.maya.type.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -17,8 +16,6 @@ public class FirebaseUtil {
     private FirebaseUtil() {
 
     }
-
-
 
     public static void initFirebaseUtil(String email) {
         setEmail(email);
@@ -67,8 +64,12 @@ public class FirebaseUtil {
     public static DatabaseReference getProjectRef(String projectID) { return FirebaseDatabase.getInstance().getReference(mProjectDBPath).child(projectID); }
 
     public static DatabaseReference getCurrentUserRef() { return FirebaseDatabase.getInstance().getReference(mUserDBPath).child(mUserID); }
-
     public static void updateCurrentUserData(User user) {
         getCurrentUserRef().setValue(user);
+    }
+
+    public static DatabaseReference getCurrentUserEventListRef() { return FirebaseDatabase.getInstance().getReference(mUserDBPath).child(mUserID).child(User.EVENT_COLLECTION); }
+    public static void updateCurrentUserEventList() {
+        getCurrentUserEventListRef().setValue(mUser.eventCollection);
     }
 }

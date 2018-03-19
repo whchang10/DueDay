@@ -1,5 +1,7 @@
-package com.app.dueday.maya;
-import android.net.Uri;
+package com.app.dueday.maya.type;
+
+import com.app.dueday.maya.type.MayaEvent;
+import com.app.dueday.maya.type.Project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,8 @@ public class User {
 
     public List<Project> projectCollection;
     public List<MayaEvent> eventCollection;
+
+    public static final String EVENT_COLLECTION = "eventCollection";
 
     public User () {
 
@@ -30,18 +34,26 @@ public class User {
     }
 
     public void addProject(Project project) {
+        if (projectCollection == null) {
+            projectCollection = new ArrayList<>();
+        }
         projectCollection.add(project);
     }
 
     public void removeProject(Project project) {
+        assert project != null;
         projectCollection.remove(project);
     }
 
     public void addEvent(MayaEvent event) {
+        if (eventCollection == null) {
+            eventCollection = new ArrayList<>();
+        }
         eventCollection.add(event);
     }
 
     public void removeEvent(MayaEvent event) {
+        assert event != null;
         eventCollection.remove(event);
     }
 

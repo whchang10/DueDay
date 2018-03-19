@@ -20,7 +20,7 @@ public class PersonalCalendar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_calendar);
 
-        setTitle(FirebaseUtil.getCurrentUser().name);
+        //setTitle("My Calendar");
 
         HashSet<Date> events = new HashSet<>();
         events.add(new Date());

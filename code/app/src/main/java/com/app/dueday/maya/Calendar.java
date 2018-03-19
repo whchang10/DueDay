@@ -18,7 +18,6 @@ import java.util.HashSet;
 public class Calendar extends AppCompatActivity {
     //CalendarView myCalendarView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

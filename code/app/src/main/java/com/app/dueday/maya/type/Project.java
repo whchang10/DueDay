@@ -1,8 +1,7 @@
-package com.app.dueday.maya;
+package com.app.dueday.maya.type;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Project {
@@ -13,8 +12,8 @@ public class Project {
     public String description;
     public List<User> memberCollection;
 
-    public Date startDate;
-    public Date endDate;
+    public MayaDate startDate;
+    public MayaDate endDate;
 
     public Project() {
 
@@ -28,7 +27,7 @@ public class Project {
         memberCollection = new ArrayList<>();
     }
 
-    public Project(String id, String name, User leader, String description, Date startDate, Date endDate) {
+    public Project(String id, String name, User leader, String description, MayaDate startDate, MayaDate endDate) {
         this(id, name, leader);
         this.description = description;
         this.startDate = startDate;
@@ -43,7 +42,7 @@ public class Project {
         memberCollection.remove(user);
     }
 
-    public void setDuration(Date startDate, Date endDate) {
+    public void setDuration(MayaDate startDate, MayaDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }

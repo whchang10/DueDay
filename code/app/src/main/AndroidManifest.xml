@@ -44,12 +44,11 @@
             android:name=".EventView"
             android:label="@string/title_activity_event_view"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!-- <activity android:namPersonalCalendarndar"></activity> -->
-        <activity android:name=".FirebaseDBTestActivity">
-        </activity>
         <activity
             android:name=".PersonalCalendar"
-            android:label="OwnCalendar"/>
+            android:label="My Calendar"/>
+        <!-- <activity android:namPersonalCalendarndar"></activity> -->
+
     </application>
 
 </manifest>
