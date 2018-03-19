@@ -17,25 +17,16 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Welcome_Splash"
-            android:theme="@style/SplashTheme">
-
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:theme="@style/SplashTheme"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".Calendar"
             android:label="MY PROJECT"
@@ -53,7 +44,12 @@
             android:name=".EventView"
             android:label="@string/title_activity_event_view"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--<activity android:name=".OwnCalendar"></activity>-->
+        <!-- <activity android:name=".OwnCalendar"></activity> -->
+        <activity android:name=".FirebaseDBTestActivity">
+        </activity>
+        <activity
+            android:name=".OwnCalendar"
+            android:label="OwnCalendar"/>
     </application>
 
 </manifest>
