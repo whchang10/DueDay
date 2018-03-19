@@ -28,7 +28,7 @@ import java.util.HashSet;
 public class CalendarView extends LinearLayout
 {
 	// for logging
-	private static final String LOGTAG = "Calendar View";
+	private static final String LOGTAG = "ProjectCalendar View";
 
 	// how many days to show, defaults to six weeks, 42 days
 	private static final int DAYS_COUNT = 42;

@@ -3,7 +3,6 @@ package com.app.dueday.maya;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -15,14 +14,14 @@ import java.util.HashSet;
 
 //import android.widget.CalendarView;
 
-public class Calendar extends AppCompatActivity {
+public class ProjectCalendar extends AppCompatActivity {
     //CalendarView myCalendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.activity_project_calendar);
 
         Intent intent = getIntent();
         String projName = intent.getStringExtra(MainActivity.EXTRA_PName);
@@ -46,9 +45,9 @@ public class Calendar extends AppCompatActivity {
             {
                 // show returned day
                 DateFormat df = SimpleDateFormat.getDateInstance();
-                Toast.makeText(Calendar.this, df.format(date), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProjectCalendar.this, df.format(date), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(Calendar.this, BasicActivity.class);
+                Intent intent = new Intent(ProjectCalendar.this, BasicActivity.class);
                 startActivity(intent);
             }
         });

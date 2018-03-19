@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent;
-            intent = new Intent(getApplicationContext(), Calendar.class);
+            intent = new Intent(getApplicationContext(), ProjectCalendar.class);
             String projectName = mProjectList.get(position).title;
             intent.putExtra(EXTRA_PName, projectName);
             startActivity(intent);

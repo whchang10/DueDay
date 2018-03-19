@@ -22,13 +22,9 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".Calendar"
+            android:name=".ProjectCalendar"
             android:label="MY PROJECT"
             android:parentActivityName=".MainActivity" />
         <activity
@@ -36,7 +32,12 @@
             android:label="NEW EVENT" />
         <activity
             android:name=".BasicActivity"
-            android:label="@string/title_activity_basic" />
+            android:label="@string/title_activity_basic">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".CreateProject"
             android:label="CREATE PROJECT" />
@@ -46,9 +47,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PersonalCalendar"
-            android:label="My Calendar"/>
+            android:label="My Calendar">
+        </activity>
         <!-- <activity android:namPersonalCalendarndar"></activity> -->
-
+        <activity
+            android:name=".FirebaseDBTestActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@ public class MayaEvent {
     public String name;
     public String location;
     public String details;
-    public boolean mPersonal;
+    public boolean personalEvent;
 
     public MayaDate beginTime;
     public MayaDate endTime;
@@ -20,12 +20,12 @@ public class MayaEvent {
 
     }
 
-    public MayaEvent(String name, String location, String details, boolean personal) {
-        this.id = name + "+" + location + "+" + details + "+" + personal;
+    public MayaEvent(String name, String location, String details, boolean personalEvent) {
+        this.id = name + "+" + location + "+" + details + "+" + personalEvent;
         this.name = name;
         this.location = location;
         this.details = details;
-        this.mPersonal = personal;
+        this.personalEvent = personalEvent;
     }
 
     public MayaEvent(String name, String location, String details, boolean personal, MayaDate beginTime, MayaDate endTime) {
@@ -36,7 +36,7 @@ public class MayaEvent {
     }
 
     public boolean isPersonalEvent() {
-        return mPersonal;
+        return personalEvent;
     }
 
     public void setDuration(MayaDate beginTime, MayaDate endTime) {
