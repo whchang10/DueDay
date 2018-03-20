@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int FIREBASE_SIGN_IN = 120;
     private static final int CREATE_PROJECT_R = 125;
 
+    private final String WORK = "Work";
+    private final String SOCIAL = "Social";
+    private final String TRAVEL = "Travel";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d(UIUtil.TAG, "New a User complete");
         }
     }
+
     private void readProjects() {
         FirebaseUtil.getCurrentUserProjectListRef().addValueEventListener(new ValueEventListener() {
             @Override
@@ -128,8 +133,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                    projectCollection = dataSnapshot.getValue(genericTypeIndicator);
                    mProjectList.clear();
                    for (Project project : projectCollection) {
+                       int image_resource;
+                       if (WORK.equals(project.tag)) {
+                           image_resource = R.drawable.ic_menu_manage;
+                       } else if (SOCIAL.equals(project.tag)) {
+                           image_resource = R.drawable.ic_menu_camera;
+                       } else if (TRAVEL.equals(project.tag)) {
+                           image_resource = R.drawable.ic_menu_gallery;
+                       } else {
+                           image_resource = R.drawable.ic_launcher_foreground;
+                       }
+
                        if (mSelectedProjectTag.equals("") || mSelectedProjectTag.equals(project.tag)) {
-                           EventListViewItem e = new EventListViewItem(R.drawable.ic_launcher_foreground, project.name, project.description);
+                           EventListViewItem e = new EventListViewItem(image_resource, project.name, project.description);
                            mProjectList.add(e);
                        }
                    }
