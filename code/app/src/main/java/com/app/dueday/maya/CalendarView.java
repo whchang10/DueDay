@@ -251,22 +251,25 @@ public class CalendarView extends LinearLayout
 							eventDate.getYear() == year)
 					{
 						// mark this day for event
-						view.setBackgroundResource(R.drawable.reminder);
-						break;
-					}
-
-					else if (eventDate.getDate() == day+1 &&
-							eventDate.getMonth() == month &&
-							eventDate.getYear() == year)
-					{
-						// mark this day for event
-						//view.setBackgroundResource(R.drawable.reminder);
-						Drawable drawable = getResources().getDrawable(R.drawable.eventbar_r);
+						Drawable drawable = getResources().getDrawable(R.drawable.eventbar_s);
 						drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 						((TextView)view).setCompoundDrawables(drawable, null, null, null);
-
 						break;
 					}
+
+//					else if (eventDate.getDate() == day+1 &&
+//							eventDate.getMonth() == month &&
+//							eventDate.getYear() == year)
+//					{
+//						// mark this day for event
+//						//view.setBackgroundResource(R.drawable.reminder);
+//						Drawable drawable = getResources().getDrawable(R.drawable.eventbar_s);
+//						//drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//						drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//						((TextView)view).setCompoundDrawables(drawable, null, null, null);
+//
+//						break;
+//					}
 				}
 			}
 

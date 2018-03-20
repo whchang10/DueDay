@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.app.dueday.maya.type.User;
 import com.firebase.ui.auth.AuthUI;
@@ -153,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
 
                         FirebaseUtil.setCurrentUser(currentUser);
+                        ((TextView)findViewById(R.id.nav_bar_name)).setText(currentUser.name);
+                        ((TextView)findViewById(R.id.nav_bar_email)).setText(currentUser.email);
                     }
 
                     @Override

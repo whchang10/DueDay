@@ -22,21 +22,22 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ProjectCalendar"
             android:label="MY PROJECT"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AddEvent"
-            android:label="NEW EVENT" />
+            android:name=".AddPersonalEvent"
+            android:label="NEW EVENT">
+        </activity>
         <activity
             android:name=".BasicActivity"
             android:label="@string/title_activity_basic">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CreateProject"

@@ -43,7 +43,6 @@ public class BasicActivity extends BaseActivity {
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         /****************/
-        // read test data, remove these line if you complete implemention
         readMayaEvent();
         /****************/
         // Populate the week view with some events.

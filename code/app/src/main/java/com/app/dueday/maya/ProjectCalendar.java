@@ -69,7 +69,7 @@ public class ProjectCalendar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent;
-                intent = new Intent(getApplicationContext(), AddEvent.class);
+                intent = new Intent(getApplicationContext(), AddPersonalEvent.class);
 
                 startActivity(intent);
             }

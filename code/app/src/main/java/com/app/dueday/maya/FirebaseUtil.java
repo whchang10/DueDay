@@ -31,6 +31,7 @@ public class FirebaseUtil {
     }
 
     public static User getCurrentUser() {
+        assert mUser != null;
         return mUser;
     }
 
