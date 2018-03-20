@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EventListAdapter mAdapter;
     public static final String EXTRA_PROJECT = "Project";
     List<Project> projectCollection;
+    private String mSelectedProjectTag = "";
 
     private static final int FIREBASE_SIGN_IN = 120;
     private static final int CREATE_PROJECT_R = 125;
@@ -127,8 +128,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                    projectCollection = dataSnapshot.getValue(genericTypeIndicator);
                    mProjectList.clear();
                    for (Project project : projectCollection) {
-                       EventListViewItem e = new EventListViewItem(R.drawable.ic_launcher_foreground, project.name, project.description);
-                       mProjectList.add(e);
+                       if (mSelectedProjectTag.equals("") || mSelectedProjectTag.equals(project.tag)) {
+                           EventListViewItem e = new EventListViewItem(R.drawable.ic_launcher_foreground, project.name, project.description);
+                           mProjectList.add(e);
+                       }
                    }
                    mAdapter.notifyDataSetChanged();
                    Log.d(UIUtil.TAG, "get data success");
@@ -228,12 +231,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_social) {
-            // Handle the camera action
+            mSelectedProjectTag = "Social";
+            readProjects();
         } else if (id == R.id.nav_travel) {
-
+            mSelectedProjectTag = "Travel";
+            readProjects();
         } else if (id == R.id.nav_work) {
-
-
+            mSelectedProjectTag = "Work";
+            readProjects();
+        } else if (id == R.id.nav_all) {
+            mSelectedProjectTag = "";
+            readProjects();
         } else if (id == R.id.nav_own) {
             Intent intent;
             intent = new Intent(getApplicationContext(), PersonalCalendar.class);
@@ -244,5 +252,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (FirebaseUtil.isInitialized()) {
+            readProjects();
+        }
     }
 }

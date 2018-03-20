@@ -47,7 +47,7 @@ public class ProjectCalendar extends AppCompatActivity {
                 DateFormat df = SimpleDateFormat.getDateInstance();
                 Toast.makeText(ProjectCalendar.this, df.format(date), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(ProjectCalendar.this, PersonalDayView.class);
+                Intent intent = new Intent(ProjectCalendar.this, ProjectDayView.class);
                 startActivity(intent);
             }
         });

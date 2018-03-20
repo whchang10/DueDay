@@ -30,27 +30,33 @@
         </activity>
         <activity
             android:name=".ProjectCalendar"
-            android:label="MY PROJECT"
+            android:label="My Project"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AddPersonalEvent"
-            android:label="NEW EVENT"></activity>
+            android:name=".PersonalCalendar"
+            android:label="My Calendar"></activity>
         <activity
             android:name=".PersonalDayView"
-            android:label="@string/title_activity_basic"></activity>
+            android:label="Day View"></activity>
+        <activity
+            android:name=".ProjectDayView"
+            android:label="Day View"></activity>
         <activity
             android:name=".CreateProject"
-            android:label="CREATE PROJECT" />
+            android:label="Create Project" />
+        <activity
+            android:name=".AddPersonalEvent"
+            android:label="New Personal Event"></activity>
+        <activity
+            android:name=".AddProjectEvent"
+            android:label="New Project Event">
+        </activity>
         <activity
             android:name=".EventView"
             android:label="@string/title_activity_event_view"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".PersonalCalendar"
-            android:label="My Calendar"></activity>
         <!-- <activity android:namPersonalCalendarndar"></activity> -->
         <activity android:name=".FirebaseDBTestActivity"></activity>
-        <activity android:name=".AddProjectEvent"></activity>
     </application>
 
 </manifest>
