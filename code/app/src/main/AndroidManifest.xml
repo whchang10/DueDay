@@ -17,46 +17,58 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Welcome_Splash"
-            android:theme="@style/SplashTheme" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".ProjectCalendar"
             android:label="My Project"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PersonalCalendar"
-            android:label="My Calendar"></activity>
+            android:label="My Calendar"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".PersonalDayView"
-            android:label="Day View"></activity>
+            android:label="Day View"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ProjectDayView"
-            android:label="Day View"></activity>
+            android:label="Day View"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".CreateProject"
-            android:label="Create Project" />
+            android:label="Create Project"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AddPersonalEvent"
-            android:label="New Personal Event"></activity>
+            android:label="New Personal Event"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".AddProjectEvent"
-            android:label="New Project Event">
+            android:label="New Project Event"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".EventView"
             android:label="@string/title_activity_event_view"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <!-- <activity android:namPersonalCalendarndar"></activity> -->
-        <activity android:name=".FirebaseDBTestActivity"></activity>
+        <activity
+            android:name=".FirebaseDBTestActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

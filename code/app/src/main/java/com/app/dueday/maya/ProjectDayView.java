@@ -26,6 +26,8 @@ public class ProjectDayView extends BaseActivity {
         events.clear();
         int id = 0;
         for (User user : mMembersCollection) {
+            if (user.eventCollection == null)
+                continue;
             for (MayaEvent mayaEvent : user.eventCollection) {
                 Calendar startTime = Calendar.getInstance();
                 startTime = Calendar.getInstance();

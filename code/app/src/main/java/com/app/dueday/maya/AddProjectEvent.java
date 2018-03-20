@@ -142,7 +142,7 @@ public class AddProjectEvent extends AppCompatActivity {
                 newMayaEvent.attendeeCollection = mProject.memberCollection;
 
                 for (User user : mMembersCollection) {
-                    user.eventCollection.add(newMayaEvent);
+                    user.addEvent(newMayaEvent);
                     FirebaseUtil.updateUserEventList(user.id, user.eventCollection);
                 }
 

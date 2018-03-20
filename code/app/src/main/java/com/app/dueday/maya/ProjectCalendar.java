@@ -50,7 +50,9 @@ public class ProjectCalendar extends AppCompatActivity {
                     for (User userLight : mProject.memberCollection) {
                         User user = dataSnapshot.child(userLight.id).getValue(User.class);
                         membersCollection.add(user);
-                        eventCollection.addAll(user.eventCollection);
+                        if (user.eventCollection != null) {
+                            eventCollection.addAll(user.eventCollection);
+                        }
                     }
 
                     for (MayaEvent mayaEvent : eventCollection) {
