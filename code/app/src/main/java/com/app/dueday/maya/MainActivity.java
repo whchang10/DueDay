@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (FirebaseUtil.isInitialized()) {
+        if (!FirebaseUtil.isInitialized()) {
             processLogin();
         }
 
@@ -90,8 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivityForResult(intent, CREATE_PROJECT_R);
             }
         });
-
-        processLogin();
     }
 
     private void processLogin() {

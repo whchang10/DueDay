@@ -19,11 +19,11 @@ import java.util.List;
  * Created by Raquib-ul-Alam Kanak on 1/3/2014.
  * Website: http://alamkanak.github.io
  */
-public class BasicActivity extends BaseActivity {
+public class PersonalDayView extends BaseActivity {
     private List<WeekViewEvent> events;
     private List<MayaEvent> eventCollection;
     private void readMayaEvent() {
-        FirebaseUtil.getCurrentUserEventListRef().addValueEventListener(new ValueEventListener() {
+        FirebaseUtil.getCurrentUserEventListRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

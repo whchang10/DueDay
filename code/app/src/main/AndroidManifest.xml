@@ -36,7 +36,7 @@
             android:name=".AddPersonalEvent"
             android:label="NEW EVENT"></activity>
         <activity
-            android:name=".BasicActivity"
+            android:name=".PersonalDayView"
             android:label="@string/title_activity_basic"></activity>
         <activity
             android:name=".CreateProject"

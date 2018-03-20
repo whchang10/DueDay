@@ -85,7 +85,7 @@ public class PersonalCalendar extends AppCompatActivity {
                 DateFormat df = SimpleDateFormat.getDateInstance();
                 Toast.makeText(PersonalCalendar.this, df.format(date), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(PersonalCalendar.this, BasicActivity.class);
+                Intent intent = new Intent(PersonalCalendar.this, PersonalDayView.class);
                 startActivity(intent);
             }
         });

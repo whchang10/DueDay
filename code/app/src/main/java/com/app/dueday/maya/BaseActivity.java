@@ -155,10 +155,10 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
         Toast.makeText(this, "Long pressed event: " + event.getName(), Toast.LENGTH_SHORT).show();
 
-        Intent intent;
-        intent = new Intent(getApplicationContext(), EventView.class);
-
-        startActivity(intent);
+//        Intent intent;
+//        intent = new Intent(getApplicationContext(), EventView.class);
+//
+//        startActivity(intent);
     }
 
     @Override
