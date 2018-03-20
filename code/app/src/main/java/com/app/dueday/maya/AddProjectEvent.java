@@ -12,8 +12,12 @@ import android.widget.Button;
 
 import com.app.dueday.maya.type.MayaDate;
 import com.app.dueday.maya.type.MayaEvent;
+import com.app.dueday.maya.type.Project;
+import com.app.dueday.maya.type.User;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.DatePickerDialog;
 import android.widget.DatePicker;
@@ -22,6 +26,8 @@ import android.widget.TimePicker;
 
 
 public class AddProjectEvent extends AppCompatActivity {
+    private Project mProject;
+    private List<User> mMembersCollection;
 
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
@@ -95,6 +101,9 @@ public class AddProjectEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_personal_event);
 
+        mProject = (Project) getIntent().getSerializableExtra(ProjectCalendar.EXTRA_PROJECT);
+        mMembersCollection = (ArrayList<User>) getIntent().getSerializableExtra(ProjectCalendar.EXTRA_MEMBERS_COLLECTION);
+
         Button add = findViewById(R.id.btn_addEvent);
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -127,10 +136,15 @@ public class AddProjectEvent extends AppCompatActivity {
                         Integer.parseInt(endTimeArray[1])
                 );
 
-                MayaEvent newMayaEvent = new MayaEvent(name, location, details, true, begin, end);
+                MayaEvent newMayaEvent = new MayaEvent(name, location, details, false, begin, end);
 
-                FirebaseUtil.getCurrentUser().addEvent(newMayaEvent);
-                FirebaseUtil.updateCurrentUserEventList();
+                newMayaEvent.projectID = mProject.id;
+                newMayaEvent.attendeeCollection = mProject.memberCollection;
+
+                for (User user : mMembersCollection) {
+                    user.eventCollection.add(newMayaEvent);
+                    FirebaseUtil.updateUserEventList(user.id, user.eventCollection);
+                }
 
                 Log.d(UIUtil.TAG, "Add new event complete");
 

@@ -141,6 +141,9 @@ public class ProjectCalendar extends AppCompatActivity {
                 Intent intent;
                 intent = new Intent(getApplicationContext(), AddProjectEvent.class);
 
+                intent.putExtra(EXTRA_PROJECT, mProject);
+                intent.putExtra(EXTRA_MEMBERS_COLLECTION, (ArrayList<User>) membersCollection);
+
                 startActivity(intent);
             }
         });

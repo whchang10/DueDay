@@ -201,7 +201,7 @@ public class CreateProject extends AppCompatActivity {
 
                 for (User user : mMemberCollection) {
                     user.addProject(project);
-                    FirebaseUtil.updateUserPrjectList(user.id, user.projectCollection);
+                    FirebaseUtil.updateUserProjectList(user.id, user.projectCollection);
                 }
 //                FirebaseUtil.getCurrentUser().addProject(project);
 //                FirebaseUtil.updateCurrentUserPrjectList();

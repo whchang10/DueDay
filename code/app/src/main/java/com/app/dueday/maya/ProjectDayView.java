@@ -1,16 +1,11 @@
 package com.app.dueday.maya;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.alamkanak.weekview.WeekViewEvent;
 import com.app.dueday.maya.type.MayaEvent;
 import com.app.dueday.maya.type.Project;
 import com.app.dueday.maya.type.User;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,12 +20,12 @@ public class ProjectDayView extends BaseActivity {
     private List<WeekViewEvent> events;
 
     private Project mProject;
-    private List<User> membersCollection;
+    private List<User> mMembersCollection;
 
     private void prepareEvents() {
         events.clear();
         int id = 0;
-        for (User user : membersCollection) {
+        for (User user : mMembersCollection) {
             for (MayaEvent mayaEvent : user.eventCollection) {
                 Calendar startTime = Calendar.getInstance();
                 startTime = Calendar.getInstance();
@@ -75,7 +70,7 @@ public class ProjectDayView extends BaseActivity {
         events = new ArrayList<WeekViewEvent>();
 
         mProject = (Project) getIntent().getSerializableExtra(ProjectCalendar.EXTRA_PROJECT);
-        membersCollection = (ArrayList<User>) getIntent().getSerializableExtra(ProjectCalendar.EXTRA_MEMBERS_COLLECTION);
+        mMembersCollection = (ArrayList<User>) getIntent().getSerializableExtra(ProjectCalendar.EXTRA_MEMBERS_COLLECTION);
 
         prepareEvents();
     }

@@ -1,5 +1,6 @@
 package com.app.dueday.maya;
 
+import com.app.dueday.maya.type.MayaEvent;
 import com.app.dueday.maya.type.Project;
 import com.app.dueday.maya.type.User;
 import com.google.firebase.database.DatabaseReference;
@@ -93,14 +94,21 @@ public class FirebaseUtil {
     public static DatabaseReference getCurrentUserProjectListRef() {
         return FirebaseDatabase.getInstance().getReference(USER_DB_PATH).child(mUserID).child(User.PROJECT_COLLECTION);
     }
-    public static void updateCurrentUserPrjectList() {
+    public static void updateCurrentUserProjectList() {
         getCurrentUserProjectListRef().setValue(mUser.projectCollection);
     }
 
     public static DatabaseReference getUserProjectListRef(String userID) {
         return FirebaseDatabase.getInstance().getReference(USER_DB_PATH).child(userID).child(User.PROJECT_COLLECTION);
     }
-    public static void updateUserPrjectList(String userID, List<Project> projectCollection) {
+    public static void updateUserProjectList(String userID, List<Project> projectCollection) {
         getUserProjectListRef(userID).setValue(projectCollection);
+    }
+
+    public static DatabaseReference getUserEventListRef(String userID) {
+        return FirebaseDatabase.getInstance().getReference(USER_DB_PATH).child(userID).child(User.EVENT_COLLECTION);
+    }
+    public static void updateUserEventList(String userID, List<MayaEvent> eventCollection) {
+        getUserEventListRef(userID).setValue(eventCollection);
     }
 }
