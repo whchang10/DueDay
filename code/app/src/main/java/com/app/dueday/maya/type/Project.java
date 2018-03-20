@@ -17,12 +17,12 @@ public class Project implements java.io.Serializable{
 
     }
 
-    public Project(String name, String tag, User leader, String leaderID) {
+    public Project(String name, String tag, String description, User leader, String leaderID) {
         this.id = name + "+" + leaderID + "+" + tag;
         this.name = name;
         this.leader = leader;
         this.tag = tag;
-
+        this.description = description;
         memberCollection = new ArrayList<>();
     }
 

@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--list item for event-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="100dp"
     android:orientation="horizontal"
     android:id="@+id/eventitem">
 
     <ImageView
         android:id="@+id/eventImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
         android:src="@drawable/previous_icon" />
 
-    <LinearLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:paddingLeft="5dp"
-        android:orientation="vertical"
-        android:layout_margin="5dp"
-        >
-        <TextView
-            android:id="@+id/eventTitle"
-            android:text="Event Title"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:textSize="25sp"
-            />
-    </LinearLayout>
-</LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:paddingLeft="5dp"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_margin="5dp"-->
+        <!--&gt;-->
+    <TextView
+        android:id="@+id/eventTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/eventImage"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/eventImage"
+        android:text="Event Title"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/eventDescription"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/eventTitle"
+        android:layout_below="@+id/eventTitle"
+        android:text="TextView" />
+    <!--</LinearLayout>-->
+</RelativeLayout>

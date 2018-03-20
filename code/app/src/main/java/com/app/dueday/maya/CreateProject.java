@@ -1,19 +1,16 @@
 package com.app.dueday.maya;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.ArrayAdapter;
-import android.widget.AdapterView;
 
 import com.app.dueday.maya.type.Project;
 import com.app.dueday.maya.type.User;
-import com.google.firebase.database.DatabaseReference;
 
 
 public class CreateProject extends AppCompatActivity {
@@ -40,12 +37,13 @@ public class CreateProject extends AppCompatActivity {
 
                 String projectName = ((EditText) findViewById(R.id.projectName)).getText().toString();
                 String tag = ((Spinner) findViewById(R.id.tagSelect)).getSelectedItem().toString();
+                String description = ((EditText) findViewById(R.id.description)).getText().toString();
                 User leader = new User(
                         FirebaseUtil.getCurrentUser().id,
                         FirebaseUtil.getCurrentUser().name,
                         FirebaseUtil.getCurrentUser().email);
                 Project project = new Project(
-                        projectName, tag,
+                        projectName, tag, description,
                         leader, FirebaseUtil.getCurrentUser().id
                 );
                 project.addMember(leader);

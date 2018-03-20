@@ -52,24 +52,12 @@ public class ProjectCalendar extends AppCompatActivity {
             }
         });
 
-
-
-//        myCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-//            @Override
-//            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-//                // display the selected date by using a toast
-//                Toast.makeText(getApplicationContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btn_addEvent);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent;
-                intent = new Intent(getApplicationContext(), AddPersonalEvent.class);
+                intent = new Intent(getApplicationContext(), AddProjectEvent.class);
 
                 startActivity(intent);
             }

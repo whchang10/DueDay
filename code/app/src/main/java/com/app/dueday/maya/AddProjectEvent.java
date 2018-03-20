@@ -21,7 +21,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 
-public class AddPersonalEvent extends AppCompatActivity {
+public class AddProjectEvent extends AppCompatActivity {
 
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
@@ -134,7 +134,7 @@ public class AddPersonalEvent extends AppCompatActivity {
 
                 Log.d(UIUtil.TAG, "Add new event complete");
 
-                AddPersonalEvent.this.finish();
+                AddProjectEvent.this.finish();
             }
         });
     }

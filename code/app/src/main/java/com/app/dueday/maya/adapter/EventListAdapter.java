@@ -39,6 +39,7 @@ public class EventListAdapter extends ArrayAdapter<EventListViewItem>{
             holder = new LocationHolder();
             holder.imgIcon = (ImageView)convertView.findViewById(R.id.eventImage);
             holder.txtTitle = (TextView)convertView.findViewById(R.id.eventTitle);
+            holder.txtDescription = (TextView)convertView.findViewById(R.id.eventDescription);
             row = convertView;
             convertView.setTag(holder);
         } else {
@@ -48,8 +49,8 @@ public class EventListAdapter extends ArrayAdapter<EventListViewItem>{
 
         EventListViewItem event = data.get(position);
         holder.txtTitle.setText(event.title);
+        holder.txtDescription.setText(event.description);
         holder.imgIcon.setImageResource(event.image);
-
         return row;
     }
 
@@ -57,5 +58,6 @@ public class EventListAdapter extends ArrayAdapter<EventListViewItem>{
     {
         ImageView imgIcon;
         TextView txtTitle;
+        TextView txtDescription;
     }
 }

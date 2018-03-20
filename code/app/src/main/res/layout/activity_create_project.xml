@@ -7,6 +7,19 @@
     tools:context="com.app.dueday.maya.CreateProject">
 
     <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="112dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
         android:id="@+id/projectName"
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -21,7 +34,7 @@
         android:id="@+id/tagSelect"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/projectName"/>
 
@@ -29,9 +42,10 @@
         android:id="@+id/invite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_person_add_white_24dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tagSelect"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:srcCompat="@drawable/ic_person_add_white_24dp" />
 
     <Button
         android:id="@+id/btn_createProject"

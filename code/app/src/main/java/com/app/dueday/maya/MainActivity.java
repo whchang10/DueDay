@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                    projectCollection = dataSnapshot.getValue(genericTypeIndicator);
                    mProjectList.clear();
                    for (Project project : projectCollection) {
-                       EventListViewItem e = new EventListViewItem(R.drawable.ic_launcher_foreground, project.name);
+                       EventListViewItem e = new EventListViewItem(R.drawable.ic_launcher_foreground, project.name, project.description);
                        mProjectList.add(e);
                    }
                    mAdapter.notifyDataSetChanged();

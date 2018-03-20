@@ -6,11 +6,12 @@ package com.app.dueday.maya.module;
 
 public class EventListViewItem {
     public int image;
-
     public String title;
+    public String description;
 
-    public EventListViewItem(int image, String title) {
+    public EventListViewItem(int image, String title, String description) {
         this.image = image;
         this.title = title;
+        this.description = description;
     }
 }
