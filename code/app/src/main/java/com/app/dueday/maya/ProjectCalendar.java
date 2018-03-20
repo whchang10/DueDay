@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.app.dueday.maya.type.Project;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +18,7 @@ import java.util.HashSet;
 
 public class ProjectCalendar extends AppCompatActivity {
     //CalendarView myCalendarView;
+    private Project mProject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +26,9 @@ public class ProjectCalendar extends AppCompatActivity {
 
         setContentView(R.layout.activity_project_calendar);
 
-        Intent intent = getIntent();
-        String projName = intent.getStringExtra(MainActivity.EXTRA_PName);
+        mProject = (Project) getIntent().getSerializableExtra(MainActivity.EXTRA_PROJECT);
 
-        setTitle(projName);
+        setTitle(mProject.name);
 
 
 

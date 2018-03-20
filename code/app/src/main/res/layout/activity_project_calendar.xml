@@ -58,15 +58,6 @@
             android:layout_weight="1"
             android:text="Member:" />
 
-        <ImageButton
-            android:id="@+id/invite"
-            android:layout_width="59dp"
-            android:layout_height="56dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventStartTime"
-            app:srcCompat="@drawable/ic_person_add_white_24dp" />
-
-
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

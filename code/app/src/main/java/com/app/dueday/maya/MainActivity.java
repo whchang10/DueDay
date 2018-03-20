@@ -1,6 +1,5 @@
 package com.app.dueday.maya;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.app.dueday.maya.type.Project;
 import com.app.dueday.maya.type.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import com.app.dueday.maya.adapter.EventListAdapter;
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ListView mListview;
     ArrayList<EventListViewItem> mProjectList;
     EventListAdapter mAdapter;
-    public static final String EXTRA_PName = "";
+    public static final String EXTRA_PROJECT = "Project";
+    List<Project> projectCollection;
 
     private static final int FIREBASE_SIGN_IN = 120;
     private static final int CREATE_PROJECT_R = 125;
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mListview.setAdapter(mAdapter);
         mListview.setOnItemClickListener(onClickProjListView);
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btn_addProject);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,21 +120,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d(UIUtil.TAG, "New a User complete");
         }
     }
+    private void readProjects() {
+        FirebaseUtil.getCurrentUserProjectListRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               if (dataSnapshot.exists()) {
+                   GenericTypeIndicator<List<Project>> genericTypeIndicator = new GenericTypeIndicator<List<Project>>() {};
+                   projectCollection = dataSnapshot.getValue(genericTypeIndicator);
+                   mProjectList.clear();
+                   for (Project project : projectCollection) {
+                       EventListViewItem e = new EventListViewItem(R.drawable.ic_launcher_foreground, project.name);
+                       mProjectList.add(e);
+                   }
+                   mAdapter.notifyDataSetChanged();
+                   Log.d(UIUtil.TAG, "get data success");
+               }
+               else {
+                   Log.d(UIUtil.TAG, "No data exists");
+               }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(UIUtil.TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == CREATE_PROJECT_R) {
-            if (resultCode == Activity.RESULT_OK) {
-                String title = intent.getStringExtra("title");
-                System.out.print("+++++");
-                System.out.print(title);
-                EventListViewItem e = new EventListViewItem(R.drawable.ic_launcher_foreground, title);
-                mProjectList.add(e);
-                mAdapter.notifyDataSetChanged();
-            }
-        }
-        else if (requestCode == FIREBASE_SIGN_IN) {
+        if (requestCode == FIREBASE_SIGN_IN) {
             IdpResponse response = IdpResponse.fromResultIntent(intent);
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
@@ -152,8 +169,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         else {
                             currentUser = dataSnapshot.getValue(User.class);
                         }
-
                         FirebaseUtil.setCurrentUser(currentUser);
+                        readProjects();
                         ((TextView)findViewById(R.id.nav_bar_name)).setText(currentUser.name);
                         ((TextView)findViewById(R.id.nav_bar_email)).setText(currentUser.email);
                     }
@@ -189,10 +206,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AdapterView.OnItemClickListener onClickProjListView = new AdapterView.OnItemClickListener(){
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent;
-            intent = new Intent(getApplicationContext(), ProjectCalendar.class);
-            String projectName = mProjectList.get(position).title;
-            intent.putExtra(EXTRA_PName, projectName);
+            Intent intent = new Intent(getApplicationContext(), ProjectCalendar.class);
+            Project selectedProject = projectCollection.get(position);
+            intent.putExtra(EXTRA_PROJECT, selectedProject);
             startActivity(intent);
         }
     };
@@ -206,33 +222,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.home_page, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//
-//        if (id == R.id.action_setting) {
-//            Intent intent;
-//            intent = new Intent(getApplicationContext(), Setting.class);
-//
-//            startActivity(intent);
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

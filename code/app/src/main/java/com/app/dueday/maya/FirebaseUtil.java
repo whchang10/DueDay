@@ -1,12 +1,13 @@
 package com.app.dueday.maya;
 
+import com.app.dueday.maya.type.Project;
 import com.app.dueday.maya.type.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseUtil {
-    private static String mUserDBPath = "all users";
-    private static String mProjectDBPath = "all projects";
+    private static final String USER_DB_PATH = "all users";
+    private static final String PROJCT_DB_PATH = "all projects";
 
     private static String mEmail;
     private static String mUserID;
@@ -58,19 +59,39 @@ public class FirebaseUtil {
     public static FirebaseDatabase getRootDB() {
         return FirebaseDatabase.getInstance();
     }
-    public static DatabaseReference getAllUserRef() { return FirebaseDatabase.getInstance().getReference(mUserDBPath); }
-    public static DatabaseReference getAllProjectRef() { return FirebaseDatabase.getInstance().getReference(mProjectDBPath); }
+    public static DatabaseReference getAllUserRef() {
+        return FirebaseDatabase.getInstance().getReference(USER_DB_PATH);
+    }
+    public static DatabaseReference getAllProjectRef() {
+        return FirebaseDatabase.getInstance().getReference(PROJCT_DB_PATH);
+    }
 
-    public static DatabaseReference getUserRef(String userID) { return FirebaseDatabase.getInstance().getReference(mUserDBPath).child(userID); }
-    public static DatabaseReference getProjectRef(String projectID) { return FirebaseDatabase.getInstance().getReference(mProjectDBPath).child(projectID); }
+    public static DatabaseReference getUserRef(String userID) {
+        return FirebaseDatabase.getInstance().getReference(USER_DB_PATH).child(userID);
+    }
+    public static DatabaseReference getAllProjectRefByID(String projectID) {
+        return FirebaseDatabase.getInstance().getReference(PROJCT_DB_PATH).child(projectID);
+    }
+    public static void updateAllProjectByID(String projectID, Project project) {
+        getAllProjectRefByID(projectID).setValue(project);
+    }
 
-    public static DatabaseReference getCurrentUserRef() { return FirebaseDatabase.getInstance().getReference(mUserDBPath).child(mUserID); }
+    public static DatabaseReference getCurrentUserRef() { return FirebaseDatabase.getInstance().getReference(USER_DB_PATH).child(mUserID); }
     public static void updateCurrentUserData(User user) {
         getCurrentUserRef().setValue(user);
     }
 
-    public static DatabaseReference getCurrentUserEventListRef() { return FirebaseDatabase.getInstance().getReference(mUserDBPath).child(mUserID).child(User.EVENT_COLLECTION); }
+    public static DatabaseReference getCurrentUserEventListRef() {
+        return FirebaseDatabase.getInstance().getReference(USER_DB_PATH).child(mUserID).child(User.EVENT_COLLECTION);
+    }
     public static void updateCurrentUserEventList() {
         getCurrentUserEventListRef().setValue(mUser.eventCollection);
+    }
+
+    public static DatabaseReference getCurrentUserProjectListRef() {
+        return FirebaseDatabase.getInstance().getReference(USER_DB_PATH).child(mUserID).child(User.PROJECT_COLLECTION);
+    }
+    public static void updateCurrentUserPrjectList() {
+        getCurrentUserProjectListRef().setValue(mUser.projectCollection);
     }
 }

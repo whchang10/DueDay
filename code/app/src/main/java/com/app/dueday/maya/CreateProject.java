@@ -11,17 +11,16 @@ import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 
+import com.app.dueday.maya.type.Project;
+import com.app.dueday.maya.type.User;
+import com.google.firebase.database.DatabaseReference;
 
 
 public class CreateProject extends AppCompatActivity {
-    EditText title;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_project);
-
-        title = findViewById(R.id.eventTitle);
 
         Spinner spinner = (Spinner) findViewById(R.id.tagSelect);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -38,12 +37,24 @@ public class CreateProject extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                String eventTitle = title.getText().toString();
-//                System.out.println("++++++");
-//                System.out.println(eventTitle);
-                intent.putExtra("title", eventTitle);
-                setResult(Activity.RESULT_OK, intent);
+
+                String projectName = ((EditText) findViewById(R.id.projectName)).getText().toString();
+                String tag = ((Spinner) findViewById(R.id.tagSelect)).getSelectedItem().toString();
+                User leader = new User(
+                        FirebaseUtil.getCurrentUser().id,
+                        FirebaseUtil.getCurrentUser().name,
+                        FirebaseUtil.getCurrentUser().email);
+                Project project = new Project(
+                        projectName, tag,
+                        leader, FirebaseUtil.getCurrentUser().id
+                );
+                project.addMember(leader);
+
+                FirebaseUtil.getCurrentUser().addProject(project);
+                FirebaseUtil.updateCurrentUserPrjectList();
+
+                FirebaseUtil.updateAllProjectByID(project.id, project);
+
                 finish();
             }
         });

@@ -4,46 +4,45 @@ package com.app.dueday.maya.type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project {
+public class Project implements java.io.Serializable{
     public String id;
     public String name;
     public User leader;
-    // add tag
+    public String tag;
     public String description;
-    public List<User> memberCollection;
 
-    public MayaDate startDate;
-    public MayaDate endDate;
+    public List<User> memberCollection;
 
     public Project() {
 
     }
 
-    public Project(String id, String name, User leader) {
-        this.id = id;
+    public Project(String name, String tag, User leader, String leaderID) {
+        this.id = name + "+" + leaderID + "+" + tag;
         this.name = name;
         this.leader = leader;
+        this.tag = tag;
 
         memberCollection = new ArrayList<>();
     }
 
-    public Project(String id, String name, User leader, String description, MayaDate startDate, MayaDate endDate) {
-        this(id, name, leader);
+    public void setDescription(String description) {
         this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
+
     public void addMember(User user) {
+        if (memberCollection == null) {
+            memberCollection = new ArrayList<>();
+        }
+
         memberCollection.add(user);
     }
 
     public void removeMember(User user) {
+        assert memberCollection != null;
+
         memberCollection.remove(user);
     }
 
-    public void setDuration(MayaDate startDate, MayaDate endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
 }
