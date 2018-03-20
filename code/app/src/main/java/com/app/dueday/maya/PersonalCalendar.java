@@ -32,8 +32,7 @@ public class PersonalCalendar extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    GenericTypeIndicator<List<MayaEvent>> genericTypeIndicator = new GenericTypeIndicator<List<MayaEvent>>() {
-                    };
+                    GenericTypeIndicator<List<MayaEvent>> genericTypeIndicator = new GenericTypeIndicator<List<MayaEvent>>() {};
                     eventCollection = dataSnapshot.getValue(genericTypeIndicator);
                     mEvents.clear();
                     for (MayaEvent mayaEvent : eventCollection) {

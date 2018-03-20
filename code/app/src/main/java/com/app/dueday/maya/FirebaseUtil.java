@@ -5,6 +5,8 @@ import com.app.dueday.maya.type.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
 public class FirebaseUtil {
     private static final String USER_DB_PATH = "all users";
     private static final String PROJCT_DB_PATH = "all projects";
@@ -93,5 +95,12 @@ public class FirebaseUtil {
     }
     public static void updateCurrentUserPrjectList() {
         getCurrentUserProjectListRef().setValue(mUser.projectCollection);
+    }
+
+    public static DatabaseReference getUserProjectListRef(String userID) {
+        return FirebaseDatabase.getInstance().getReference(USER_DB_PATH).child(userID).child(User.PROJECT_COLLECTION);
+    }
+    public static void updateUserPrjectList(String userID, List<Project> projectCollection) {
+        getUserProjectListRef(userID).setValue(projectCollection);
     }
 }
