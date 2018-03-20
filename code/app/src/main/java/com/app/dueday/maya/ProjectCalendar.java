@@ -30,8 +30,6 @@ public class ProjectCalendar extends AppCompatActivity {
 
         setTitle(mProject.name);
 
-
-
         HashSet<Date> events = new HashSet<>();
         events.add(new Date());
         //myCalendarView = (CalendarView) findViewById(R.id.CalendarView); // get the reference of CalendarView

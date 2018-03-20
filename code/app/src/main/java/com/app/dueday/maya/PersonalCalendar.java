@@ -31,21 +31,28 @@ public class PersonalCalendar extends AppCompatActivity {
         FirebaseUtil.getCurrentUserEventListRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<List<MayaEvent>> genericTypeIndicator = new GenericTypeIndicator<List<MayaEvent>>(){};
-                eventCollection = dataSnapshot.getValue(genericTypeIndicator);
-                for (MayaEvent mayaEvent : eventCollection) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-                    String dateInString = mayaEvent.beginTime.day + "/" + mayaEvent.beginTime.month + "/" + mayaEvent.beginTime.year;
-                    try {
-                        Date dateToAdd = sdf.parse(dateInString);
-                        mEvents.add(dateToAdd);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                if (dataSnapshot.exists()) {
+                    GenericTypeIndicator<List<MayaEvent>> genericTypeIndicator = new GenericTypeIndicator<List<MayaEvent>>() {
+                    };
+                    eventCollection = dataSnapshot.getValue(genericTypeIndicator);
+                    mEvents.clear();
+                    for (MayaEvent mayaEvent : eventCollection) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+                        String dateInString = mayaEvent.beginTime.day + "/" + mayaEvent.beginTime.month + "/" + mayaEvent.beginTime.year;
+                        try {
+                            Date dateToAdd = sdf.parse(dateInString);
+                            mEvents.add(dateToAdd);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        //add a date
                     }
-                    //add a date
+                    mCalendarView.updateCalendar(mEvents);
+                    Log.d(UIUtil.TAG, "get data success");
                 }
-                mCalendarView.updateCalendar(mEvents);
-                Log.d(UIUtil.TAG, "get data success");
+                else {
+                    Log.d(UIUtil.TAG, "No data exists");
+                }
             }
 
             @Override
