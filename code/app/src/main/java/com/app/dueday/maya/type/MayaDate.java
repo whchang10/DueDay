@@ -1,6 +1,6 @@
 package com.app.dueday.maya.type;
 
-public class MayaDate {
+public class MayaDate implements java.io.Serializable{
     public int year;
     public int month;
     public int day;

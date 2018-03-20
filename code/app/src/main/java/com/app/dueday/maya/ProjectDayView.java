@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.alamkanak.weekview.WeekViewEvent;
 import com.app.dueday.maya.type.MayaEvent;
+import com.app.dueday.maya.type.Project;
+import com.app.dueday.maya.type.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
@@ -22,6 +24,10 @@ import java.util.List;
 public class ProjectDayView extends BaseActivity {
     private List<WeekViewEvent> events;
     private List<MayaEvent> eventCollection;
+
+    private Project mProject;
+    private List<User> membersCollection;
+
     private void readMayaEvent() {
         FirebaseUtil.getCurrentUserEventListRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -72,6 +78,11 @@ public class ProjectDayView extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         events = new ArrayList<WeekViewEvent>();
+
+        mProject = (Project) getIntent().getSerializableExtra(ProjectCalendar.EXTRA_PROJECT);
+        membersCollection = (ArrayList<User>) getIntent().getSerializableExtra(ProjectCalendar.EXTRA_MEMBERS_COLLECTION);
+
+
         readMayaEvent();
     }
 

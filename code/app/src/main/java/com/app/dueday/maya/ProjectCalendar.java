@@ -35,6 +35,9 @@ public class ProjectCalendar extends AppCompatActivity {
     private Project mProject;
     private List<User> membersCollection;
 
+    public static final String EXTRA_PROJECT = "Project";
+    public static final String EXTRA_MEMBERS_COLLECTION = "MembersCollection";
+
     private void readMemebersEvent() {
         FirebaseUtil.getAllUserRef().addValueEventListener(new ValueEventListener() {
             @Override
@@ -116,7 +119,16 @@ public class ProjectCalendar extends AppCompatActivity {
                 DateFormat df = SimpleDateFormat.getDateInstance();
                 Toast.makeText(ProjectCalendar.this, df.format(date), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(ProjectCalendar.this, PersonalDayView.class);
+                Intent intent = new Intent(ProjectCalendar.this, ProjectDayView.class);
+                intent.putExtra(EXTRA_PROJECT, mProject);
+
+//                ArrayList<User> memberCollectionLight = new ArrayList<>();
+//                for (User user : membersCollection) {
+//                    User userLight = new User(user.id, user.name, user.email);
+//                    userLight.eventCollection = user.eventCollection;
+//                    memberCollectionLight.add(userLight);
+//                }
+                intent.putExtra(EXTRA_MEMBERS_COLLECTION, (ArrayList<User>) membersCollection);
                 startActivity(intent);
             }
         });
@@ -127,7 +139,7 @@ public class ProjectCalendar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent;
-                intent = new Intent(getApplicationContext(), AddPersonalEvent.class);
+                intent = new Intent(getApplicationContext(), AddProjectEvent.class);
 
                 startActivity(intent);
             }

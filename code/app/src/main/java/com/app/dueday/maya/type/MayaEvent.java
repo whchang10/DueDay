@@ -3,7 +3,7 @@ package com.app.dueday.maya.type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MayaEvent {
+public class MayaEvent implements java.io.Serializable{
     public String id;
     public String name;
     public String location;
