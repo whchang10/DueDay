@@ -38,13 +38,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/projectName"/>
 
+    <LinearLayout
+        android:id="@+id/membersContainer"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:orientation="horizontal"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description">
+
+        <TextView
+            android:id="@+id/members"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Members:" />
+
+    </LinearLayout>
+
     <ImageButton
         android:id="@+id/invite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagSelect"
+        app:layout_constraintTop_toBottomOf="@+id/membersContainer"
         app:srcCompat="@drawable/ic_person_add_white_24dp" />
 
     <Button
