@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -24,8 +25,10 @@ import java.util.List;
 
 public class PersonalCalendar extends AppCompatActivity {
     private HashSet<Date> mEvents;
-    private List<MayaEvent> eventCollection;
+    private List<MayaEvent> mEventCollection;
     CalendarView mCalendarView;
+
+    public static String EVENT_COLLECTION = "EventCollection";
 
     private void readMayaEvent() {
         FirebaseUtil.getCurrentUserEventListRef().addValueEventListener(new ValueEventListener() {
@@ -33,9 +36,9 @@ public class PersonalCalendar extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     GenericTypeIndicator<List<MayaEvent>> genericTypeIndicator = new GenericTypeIndicator<List<MayaEvent>>() {};
-                    eventCollection = dataSnapshot.getValue(genericTypeIndicator);
+                    mEventCollection = dataSnapshot.getValue(genericTypeIndicator);
                     mEvents.clear();
-                    for (MayaEvent mayaEvent : eventCollection) {
+                    for (MayaEvent mayaEvent : mEventCollection) {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
                         String dateInString = mayaEvent.beginTime.day + "/" + mayaEvent.beginTime.month + "/" + mayaEvent.beginTime.year;
                         try {
@@ -85,6 +88,7 @@ public class PersonalCalendar extends AppCompatActivity {
                 Toast.makeText(PersonalCalendar.this, df.format(date), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(PersonalCalendar.this, PersonalDayView.class);
+                intent.putExtra(UIUtil.GOTO_DATE, date);
                 startActivity(intent);
             }
         });
@@ -96,6 +100,7 @@ public class PersonalCalendar extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent;
                 intent = new Intent(getApplicationContext(), AddPersonalEvent.class);
+                intent.putExtra(EVENT_COLLECTION, (ArrayList<MayaEvent>)mEventCollection);
 
                 startActivity(intent);
             }

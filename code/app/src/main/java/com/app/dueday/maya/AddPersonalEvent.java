@@ -13,7 +13,10 @@ import android.widget.Button;
 import com.app.dueday.maya.type.MayaDate;
 import com.app.dueday.maya.type.MayaEvent;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import android.app.DatePickerDialog;
 import android.widget.DatePicker;
@@ -22,6 +25,22 @@ import android.widget.TimePicker;
 
 
 public class AddPersonalEvent extends AppCompatActivity {
+
+    static class DateStorage {
+        int year;
+        int month;
+        int day;
+
+        DateStorage() {
+            year = 0;
+            month = 0;
+            day = 0;
+        }
+    }
+    private static DateStorage mStartDate;
+    private static DateStorage mEndDate;
+
+    private List<MayaEvent> mEventCollection;
 
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
@@ -74,6 +93,32 @@ public class AddPersonalEvent extends AppCompatActivity {
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
             month = month + 1; // bug fix workaround
+            if (mPickerInput.getId() == R.id.eventStartDate) {
+                mStartDate.year = year;
+                mStartDate.month = month;
+                mStartDate.day = day;
+
+                if ((mEndDate.year != 0 && mStartDate.month != 0 && mStartDate.day != 0) &&
+                    (mStartDate.year > mEndDate.year || mStartDate.month > mEndDate.month || mStartDate.day > mEndDate.day)) {
+
+                    UIUtil.getInstance().showToast(getActivity(), "Start Date cannot after than End Date");
+
+                    return;
+                }
+            }
+            else if (mPickerInput.getId() == R.id.eventEndDate) {
+                mEndDate.year = year;
+                mEndDate.month = month;
+                mEndDate.day = day;
+
+                if ((mStartDate.year != 0 && mStartDate.month != 0 && mStartDate.day != 0) &&
+                    (mStartDate.year > mEndDate.year || mStartDate.month > mEndDate.month || mStartDate.day > mEndDate.day)) {
+
+                    UIUtil.getInstance().showToast(getActivity(), "End Date cannot before than Start Date");
+
+                    return;
+                }
+            }
             mPickerInput.setText(month + " / " + day + " / " + year);
             Log.d(UIUtil.TAG, "onDateSet");
         }
@@ -90,10 +135,29 @@ public class AddPersonalEvent extends AppCompatActivity {
         datePickerFragment.show(getFragmentManager(), "datePicker");
     }
 
+    private long convertMayaDateToTimeStamp(MayaDate mayaDate) {
+        long timeStamp = 0;
+        String dateString = "" + mayaDate.year + "/" + mayaDate.month + "/" + mayaDate.day + " "
+                + mayaDate.hourOfDay + ":" + mayaDate.minute + ":" + "00";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        try {
+            date = sdf.parse(dateString);
+        } catch (Exception e){}
+
+        timeStamp = date.getTime();
+
+        return timeStamp;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_personal_event);
+
+        mStartDate = new DateStorage();
+        mEndDate = new DateStorage();
+
+        mEventCollection = (List<MayaEvent>) getIntent().getSerializableExtra(PersonalCalendar.EVENT_COLLECTION);
 
         Button add = findViewById(R.id.btn_addEvent);
         add.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +190,21 @@ public class AddPersonalEvent extends AppCompatActivity {
                         Integer.parseInt(endTimeArray[0]),
                         Integer.parseInt(endTimeArray[1])
                 );
+
+                long beginDateTS = convertMayaDateToTimeStamp(begin);
+                long endDateTS = convertMayaDateToTimeStamp(end);
+
+                for (MayaEvent event : mEventCollection) {
+                    long eventBeginDateTS = convertMayaDateToTimeStamp(event.beginTime);
+                    long eventEndDateTS = convertMayaDateToTimeStamp(event.endTime);
+
+                    if ((eventBeginDateTS <= beginDateTS && eventEndDateTS >= beginDateTS) ||
+                        (eventBeginDateTS <= endDateTS && eventEndDateTS >= endDateTS) ||
+                        (beginDateTS <= eventBeginDateTS && endDateTS >= eventEndDateTS)){
+                        UIUtil.getInstance().showToast(getApplicationContext(), "Cannot add event at busy hours.");
+                        return;
+                    }
+                }
 
                 MayaEvent newMayaEvent = new MayaEvent(name, location, details, true, begin, end);
 

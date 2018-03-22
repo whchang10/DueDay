@@ -8,6 +8,7 @@ import android.widget.Toast;
 public class UIUtil {
 
     public static final String TAG = "MAYA: ";
+    public static final String GOTO_DATE = "GOTODATE";
     private static UIUtil mUIUtilIns;
 
     public static UIUtil getInstance() {

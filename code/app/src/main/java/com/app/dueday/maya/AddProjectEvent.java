@@ -15,8 +15,10 @@ import com.app.dueday.maya.type.MayaEvent;
 import com.app.dueday.maya.type.Project;
 import com.app.dueday.maya.type.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.app.DatePickerDialog;
@@ -96,6 +98,21 @@ public class AddProjectEvent extends AppCompatActivity {
         datePickerFragment.show(getFragmentManager(), "datePicker");
     }
 
+    private long convertMayaDateToTimeStamp(MayaDate mayaDate) {
+        long timeStamp = 0;
+        String dateString = "" + mayaDate.year + "/" + mayaDate.month + "/" + mayaDate.day + " "
+                + mayaDate.hourOfDay + ":" + mayaDate.minute + ":" + "00";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        try {
+            date = sdf.parse(dateString);
+        } catch (Exception e){}
+
+        timeStamp = date.getTime();
+
+        return timeStamp;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +152,24 @@ public class AddProjectEvent extends AppCompatActivity {
                         Integer.parseInt(endTimeArray[0]),
                         Integer.parseInt(endTimeArray[1])
                 );
+
+                long beginDateTS = convertMayaDateToTimeStamp(begin);
+                long endDateTS = convertMayaDateToTimeStamp(end);
+
+                for (User user : mMembersCollection) {
+                    List<MayaEvent> eventCollection = user.getEventCollection();
+                    for (MayaEvent event : eventCollection) {
+                        long eventBeginDateTS = convertMayaDateToTimeStamp(event.beginTime);
+                        long eventEndDateTS = convertMayaDateToTimeStamp(event.endTime);
+
+                        if ((eventBeginDateTS <= beginDateTS && eventEndDateTS >= beginDateTS) ||
+                                (eventBeginDateTS <= endDateTS && eventEndDateTS >= endDateTS) ||
+                                (beginDateTS <= eventBeginDateTS && endDateTS >= eventEndDateTS)) {
+                            UIUtil.getInstance().showToast(getApplicationContext(), "Cannot add event at busy hours.");
+                            return;
+                        }
+                    }
+                }
 
                 MayaEvent newMayaEvent = new MayaEvent(name, location, details, false, begin, end);
 

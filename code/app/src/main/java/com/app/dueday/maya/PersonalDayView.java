@@ -12,6 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,6 +73,10 @@ public class PersonalDayView extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         events = new ArrayList<WeekViewEvent>();
+        Date date = (Date) getIntent().getSerializableExtra(UIUtil.GOTO_DATE);
+        Calendar moveToDate = Calendar.getInstance();
+        moveToDate.setTime(date);
+        getWeekView().goToDate(moveToDate);
         readMayaEvent();
     }
 

@@ -40,6 +40,20 @@ public class User implements java.io.Serializable{
         eventCollection = new ArrayList<>();
     }
 
+    public List<MayaEvent> getEventCollection() {
+         if (eventCollection == null ) {
+             eventCollection = new ArrayList<MayaEvent>();
+         }
+         return eventCollection;
+    }
+
+    public List<Project> getProjectCollection() {
+        if (projectCollection == null) {
+            projectCollection = new ArrayList<Project>();
+        }
+        return projectCollection;
+    }
+
     public void addEvent(MayaEvent event) {
         if (eventCollection == null) {
             eventCollection = new ArrayList<>();

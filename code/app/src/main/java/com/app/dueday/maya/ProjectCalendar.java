@@ -131,6 +131,8 @@ public class ProjectCalendar extends AppCompatActivity {
 //                    memberCollectionLight.add(userLight);
 //                }
                 intent.putExtra(EXTRA_MEMBERS_COLLECTION, (ArrayList<User>) membersCollection);
+                intent.putExtra(UIUtil.GOTO_DATE, date);
+
                 startActivity(intent);
             }
         });
