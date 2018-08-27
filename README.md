@@ -7,5 +7,6 @@ Most of the existing calendar applications are made for personal usage. It is di
 
 # Tools
 # Contributers
-Kai<br>
-Wen-Han Chang: UI flow implementation, 
+Kai Chieh Liu: UI desing and implementation, Application design<br>
+Wen-Han Chang: Application design and Implementation, Database desing and Implementation<br>
+XinLin Feng: Application Implementation, Database desing
