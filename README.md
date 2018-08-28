@@ -16,7 +16,10 @@ Most of the existing calendar applications are made for personal usage. It is di
 <img src="/presentation/pic/15.PNG" width="48%" height="48%">
 
 # Tools And Libraries
+
 # Contributers
-**_Kai Chieh Liu_** UI desing and implementation, Application design, Presentation<br>
+<a href="https://github.com/kaicl">**_Kai Chieh Liu_**</a> UI desing and implementation, Application design, Presentation<br>
 **_Wen-Han Chang_** Application design and Implementation, Database desing and Implementation<br>
 **_XinLin Feng_** Application Implementation, Database desing
+
+<a href="https://github.com/kaicl"></a>
