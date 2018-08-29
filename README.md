@@ -17,7 +17,7 @@ Most of the existing calendar applications are made for personal usage. It is di
 
 # Tools And Libraries
 **Tools:** Intellij, Adobe illustrator<br>
-**Libraries:** Firebase SDK, Android framework, JDK
+**Libraries:** <a href="https://github.com/alamkanak/Android-Week-View">Android Week View</a>, Firebase SDK, Android framework, JDK
 # Contributers
 <a href="https://github.com/kaicl">**_Kai Chieh Liu_**</a> UI desing and implementation, Application design, Presentation<br>
 <a href="https://github.com/whchang10">**_Wen-Han Chang_**</a> Application design and Implementation, Database desing and Implementation<br>
